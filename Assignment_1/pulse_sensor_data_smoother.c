@@ -188,7 +188,10 @@ int main(int argc, char *argv[]) {
     }
     fclose(out);
 
-    // detection of peaks and calculation of heart beat
+    /*
+     detection of peaks and calculation of heart beat using data smoothed by 
+    savitzy golay filter, mean filter, savitzy golay filter
+    */
 
     int flag=0, count=0;
     int *array_peak_positions=(int *)calloc(sizeof(int),(size_of_data/2));
@@ -201,6 +204,9 @@ int main(int argc, char *argv[]) {
             if(flag==1) {
                 if(k>0) {
                     int diff=j-1-array_peak_positions[k-1];
+
+                    // for neglecting peaks near by and taking maximum of them
+
                     if(diff > 30) {
                         array_peak_positions[k]=j-1;
                         // printf("%d = %d\n",j-1, array_data_smooth_average_smooth[j-1]);
@@ -210,7 +216,6 @@ int main(int argc, char *argv[]) {
                     }
                     else {
                         if(array_data_smooth_average_smooth[array_peak_positions[k-1]]<array_data_smooth_average_smooth[j-1]) {
-                            // printf("hi\n");
                             array_peak_positions[k-1]=j-1;
                             flag=0;
                         }
@@ -232,13 +237,22 @@ int main(int argc, char *argv[]) {
             }
         }
     }
-    // printf("%d\n",count);
 
     out=fopen("peak_points.csv","w");
     for(j=0;j<count;j++) {
         fprintf(out,"%d %d\n",array_peak_positions[j],array_data_smooth_average_smooth[array_peak_positions[j]]);
     }
     fclose(out);
+    
+    float heart_rate=0, heart_rate_average=0;
+
+    for(j=0;j<count-1;j++) {
+        heart_rate=(6000.0)/(array_peak_positions[j+1]-array_peak_positions[j]);
+        // printf("heart_rate = %0.2f\n",heart_rate);
+        heart_rate_average=heart_rate_average+heart_rate;
+    }
+
+    printf("heart_rate average = %0.2f\n", (heart_rate_average/(j)));
 
     return 0;
 }
