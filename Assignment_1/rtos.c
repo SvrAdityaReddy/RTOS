@@ -10,6 +10,57 @@ int savitzy_golay_filter(int *data,int index) {
     return approximated_value;
 }
 
+// window size is 3
+
+void median_filter(int *array_data_smooth, int *array_data_smooth_median,int size_of_data) {
+    int j=0,temp=0;
+    for(j=0;j<size_of_data;j++) {
+        if(j==0) {
+            if(array_data_smooth[j]>array_data_smooth[j+1]) {
+                array_data_smooth_median[j]=array_data_smooth[j];
+            }
+            else {
+                array_data_smooth_median[j]=array_data_smooth[j+1];
+            }
+        }
+        else {
+            if(j==size_of_data-1) {
+                if(array_data_smooth[j]>array_data_smooth[j-1]) {
+                    array_data_smooth_median[j]=array_data_smooth[j];
+                }
+                else {
+                    array_data_smooth_median[j]=array_data_smooth[j-1];
+                }
+            }
+            else {
+                temp=(array_data_smooth[j-1]>array_data_smooth[j]) ? array_data_smooth[j-1] : array_data_smooth[j];
+                array_data_smooth_median[j]=(temp<array_data_smooth[j+1]) ? temp : array_data_smooth[j+1]; 
+            }
+        }
+    }
+    return;
+}
+
+// window size is 3
+
+void moving_average_filter(int *array_data_smooth, int *array_data_smooth_average,int size_of_data) {
+    int j=0;
+    for(j=0;j<size_of_data;j++) {
+        if(j==0) {
+            array_data_smooth_average[j]=(array_data_smooth[j]+array_data_smooth[j+1])/2.0;
+        }
+        else {
+            if(j==size_of_data-1) {
+                array_data_smooth_average[j]=(array_data_smooth[j-1]+array_data_smooth[j])/2.0;
+            }
+            else {
+                array_data_smooth_average[j]=(array_data_smooth[j-1]+array_data_smooth[j]+array_data_smooth[j+1])/3.0;
+            }
+        }
+    }
+    return;
+}
+
 int main(int argc, char *argv[]) {
     int size_of_data=0, temp=0, i=0, j=0;
     FILE *in;
@@ -62,58 +113,23 @@ int main(int argc, char *argv[]) {
     int * array_data_smooth=(int *)malloc(sizeof(int)*size_of_data);
 
     for(j=0;j<size_of_data;j++) {
-        // j+2 because actual data starts after two positions
+        // j+3 because actual data starts after two positions
         array_data_smooth[j]=savitzy_golay_filter(array_data,j+3);
-        // printf("%d\n",array_data_smooth[j]);
     }
 
     // apply median filter
     
     int * array_data_smooth_median=(int *)malloc(sizeof(int)*size_of_data);
 
-    for(j=0;j<size_of_data;j++) {
-        if(j==0) {
-            if(array_data_smooth[j]>array_data_smooth[j+1]) {
-                array_data_smooth_median[j]=array_data_smooth[j];
-            }
-            else {
-                array_data_smooth_median[j]=array_data_smooth[j+1];
-            }
-        }
-        else {
-            if(j==size_of_data-1) {
-                if(array_data_smooth[j]>array_data_smooth[j-1]) {
-                    array_data_smooth_median[j]=array_data_smooth[j];
-                }
-                else {
-                    array_data_smooth_median[j]=array_data_smooth[j-1];
-                }
-            }
-            else {
-                temp=(array_data_smooth[j-1]>array_data_smooth[j]) ? array_data_smooth[j-1] : array_data_smooth[j];
-                array_data_smooth_median[j]=(temp<array_data_smooth[j+1]) ? temp : array_data_smooth[j+1]; 
-            }
-        }
-    }
+    median_filter(array_data_smooth,array_data_smooth_median,size_of_data);
 
     // apply average filter
 
     int * array_data_smooth_average=(int *)malloc(sizeof(int)*size_of_data);
-    for(j=0;j<size_of_data;j++) {
-        if(j==0) {
-            array_data_smooth_average[j]=(array_data[j]+array_data_smooth[j+1])/2.0;
-        }
-        else {
-            if(j==size_of_data-1) {
-                array_data_smooth_average[j]=(array_data_smooth[j-1]+array_data_smooth[j])/2.0;
-            }
-            else {
-                array_data_smooth_average[j]=(array_data_smooth[j-1]+array_data_smooth[j]+array_data_smooth[j+1])/3.0;
-            }
-        }
-    }
+    
+    moving_average_filter(array_data_smooth,array_data_smooth_average,size_of_data);
 
-    // smoothening moving average data
+    // smoothening moving average data by savitzy golay filter
 
     for(j=0;j<size_of_data;j++) {
         array_data[j+3]=array_data_smooth[j];
@@ -129,9 +145,8 @@ int main(int argc, char *argv[]) {
     int * array_data_smooth_average_smooth=(int *)malloc(sizeof(int)*size_of_data);
 
     for(j=0;j<size_of_data;j++) {
-        // j+2 because actual data starts after two positions
+        // j+3 because actual data starts after two positions
         array_data_smooth_average_smooth[j]=savitzy_golay_filter(array_data,j+3);
-        // printf("%d\n",array_data_smooth[j]);
     }
 
     // writing smoothed data to a file
@@ -139,30 +154,43 @@ int main(int argc, char *argv[]) {
     out=fopen("data_smooth.csv","w");
     for(j=0;j<size_of_data;j++) {
         fprintf(out,"%d\n",array_data_smooth[j]);
-        // printf("%d\n",array_data_smooth[j]);
     }
     fclose(out);
 
+    /*
+     writing data to a file after applying median filter on data 
+    smoothed by savitzy golay filter
+    */
     out=fopen("data_smooth_median.csv","w");
     for(j=0;j<size_of_data;j++) {
         fprintf(out,"%d\n",array_data_smooth_median[j]);
-        // printf("%d\n",array_data_smooth[j]);
     }
     fclose(out);
 
+    /* 
+    writing data to a file after applying mean filter on data 
+    smoothed by savitzy golay filter
+    */
     out=fopen("data_smooth_average.csv","w");
     for(j=0;j<size_of_data;j++) {
         fprintf(out,"%d\n",array_data_smooth_average[j]);
-        // printf("%d\n",array_data_smooth[j]);
     }
     fclose(out);
+
+    /*
+     writing data after applying again savitzy golay filter on data 
+     smoothed by savitzy golay filter and mean filter
+    */
 
     out=fopen("data_smooth_average_smooth.csv","w");
     for(j=0;j<size_of_data;j++) {
         fprintf(out,"%d\n",array_data_smooth_average_smooth[j]);
-        // printf("%d\n",array_data_smooth[j]);
     }
     fclose(out);
+
+    // detection of peaks
+
+    
 
     return 0;
 }
