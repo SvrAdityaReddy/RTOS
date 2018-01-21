@@ -193,7 +193,7 @@ int main(int argc, char *argv[]) {
     savitzy golay filter, mean filter, savitzy golay filter
     */
 
-    int flag=0, count=0;
+    int flag=0, count=0; // count stores number of peaks in a signal
     int *array_peak_positions=(int *)calloc(sizeof(int),(size_of_data/2));
 
     for(j=0;j<size_of_data;j++) {
