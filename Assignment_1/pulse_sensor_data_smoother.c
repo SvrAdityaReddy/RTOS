@@ -62,7 +62,7 @@ void moving_average_filter(int *array_data_smooth, int *array_data_smooth_averag
 }
 
 int main(int argc, char *argv[]) {
-    int size_of_data=0, temp=0, i=0, j=0;
+    int size_of_data=0, temp=0, i=0, j=0, k=0;
     FILE *in;
     FILE *out;
     in=fopen(argv[1],"rw");
@@ -188,9 +188,57 @@ int main(int argc, char *argv[]) {
     }
     fclose(out);
 
-    // detection of peaks
+    // detection of peaks and calculation of heart beat
 
-    
+    int flag=0, count=0;
+    int *array_peak_positions=(int *)calloc(sizeof(int),(size_of_data/2));
+
+    for(j=0;j<size_of_data;j++) {
+        if((array_data_smooth_average_smooth[j]>520 && array_data_smooth_average_smooth[j-1]>520) && (array_data_smooth_average_smooth[j] >= array_data_smooth_average_smooth[j-1])) {
+            flag=1;
+        }
+        else {
+            if(flag==1) {
+                if(k>0) {
+                    int diff=j-1-array_peak_positions[k-1];
+                    if(diff > 30) {
+                        array_peak_positions[k]=j-1;
+                        // printf("%d = %d\n",j-1, array_data_smooth_average_smooth[j-1]);
+                        k=k+1;
+                        count=count+1;
+                        flag=0;
+                    }
+                    else {
+                        if(array_data_smooth_average_smooth[array_peak_positions[k-1]]<array_data_smooth_average_smooth[j-1]) {
+                            // printf("hi\n");
+                            array_peak_positions[k-1]=j-1;
+                            flag=0;
+                        }
+                        else {
+                            flag=0;
+                        }
+                    }
+                }
+                else {
+                    array_peak_positions[k]=j-1;
+                    // printf("%d = %d\n",j-1, array_data_smooth_average_smooth[j-1]);
+                    k=k+1;
+                    count=count+1;
+                    flag=0;
+                }
+            }
+            else {
+                flag=0;
+            }
+        }
+    }
+    // printf("%d\n",count);
+
+    out=fopen("peak_points.csv","w");
+    for(j=0;j<count;j++) {
+        fprintf(out,"%d %d\n",array_peak_positions[j],array_data_smooth_average_smooth[array_peak_positions[j]]);
+    }
+    fclose(out);
 
     return 0;
 }
