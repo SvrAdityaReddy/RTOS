@@ -244,15 +244,17 @@ int main(int argc, char *argv[]) {
     }
     fclose(out);
     
-    float heart_rate=0, heart_rate_average=0;
+    printf("heart beat = %d\n",count);
 
-    for(j=0;j<count-1;j++) {
-        heart_rate=(6000.0)/(array_peak_positions[j+1]-array_peak_positions[j]);
-        // printf("heart_rate = %0.2f\n",heart_rate);
-        heart_rate_average=heart_rate_average+heart_rate;
-    }
+    // float heart_rate=0, heart_rate_average=0;
 
-    printf("heart_rate average = %0.2f\n", (heart_rate_average/(j)));
+    // for(j=0;j<count-1;j++) {
+    //     heart_rate=(6000.0)/(array_peak_positions[j+1]-array_peak_positions[j]);
+    //     // printf("heart_rate = %0.2f\n",heart_rate);
+    //     heart_rate_average=heart_rate_average+heart_rate;
+    // }
+
+    // printf("heart_rate average = %0.2f\n", (heart_rate_average/(j)));
 
     return 0;
 }
