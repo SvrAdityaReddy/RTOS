@@ -8,13 +8,14 @@
 // global variables
 int g_first=1, g_second=3, g_third=4;
 
-void print_variable(int *a, int *b, int *c) {
+void print_variable() {
+    int j, k, l;
     g_first=5;
     g_second=8;
     g_third=9;
-    printf("Address of local variable: a is %p\n",&a);
-    printf("Address of local variable: b is %p\n",&b);
-    printf("Address of local variable: c is %p\n",&c);
+    printf("Address of local variable: j is %p\n",&j);
+    printf("Address of local variable: k is %p\n",&k);
+    printf("Address of local variable: l is %p\n",&l);
     printf("Address of global variable: g_first is %p\n",&g_first);
     printf("Address of global variable: g_second is %p\n",&g_second);
     printf("Address of global variable: g_third is %p\n",&g_third);
@@ -54,7 +55,7 @@ int main() {
             fprintf(in,"kill -9 %d\n",getpid());
             fprintf(in,"rm -rf $0");
             fclose(in);
-            print_variable(&a,&b,&c);
+            print_variable();
             while(1) {
 
             }
