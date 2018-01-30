@@ -6,15 +6,21 @@
 #include <unistd.h>
 
 // global variables
-int g_first, g_second, g_third;
+int g_first=1, g_second=3, g_third=4;
 
 void print_variable(int *a, int *b, int *c) {
+    g_first=5;
+    g_second=8;
+    g_third=9;
     printf("Address of local variable: a is %p\n",&a);
     printf("Address of local variable: b is %p\n",&b);
     printf("Address of local variable: c is %p\n",&c);
     printf("Address of global variable: g_first is %p\n",&g_first);
     printf("Address of global variable: g_second is %p\n",&g_second);
     printf("Address of global variable: g_third is %p\n",&g_third);
+    printf("Global Value g_first: %d\n",g_first);
+    printf("Global Value g_second: %d\n",g_second);
+    printf("Global Value g_third: %d\n",g_third);
     return;
 }
 
@@ -27,6 +33,9 @@ int main() {
     printf("Address of global variable: g_first is %p\n",&g_first);
     printf("Address of global variable: g_second is %p\n",&g_second);
     printf("Address of global variable: g_third is %p\n",&g_third);
+    printf("Global Value g_first: %d\n",g_first);
+    printf("Global Value g_second: %d\n",g_second);
+    printf("Global Value g_third: %d\n",g_third);
     pid_t child_pid;
     int i;
     for(i=0;i<3;i++) {
