@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 // global variables
@@ -25,11 +28,20 @@ int main() {
     printf("Address of global variable: g_second is %p\n",&g_second);
     printf("Address of global variable: g_third is %p\n",&g_third);
     pid_t child_pid;
-    child_pid=fork();
+    int i;
+    for(i=0;i<3;i++) {
+        child_pid=fork();
+        if(child_pid==0) {
+            break;
+        }
+    }
     if(child_pid >=0) {
         if(child_pid==0) {
             FILE *in;
-            in=fopen("child.sh","w");
+            char name_string[10];
+            char file_name_string[10];
+            sprintf(name_string,"%d",i);
+            in=fopen(strncat(strncat(strncpy(file_name_string,"child",5),name_string,1),".sh",3),"w");
             fprintf(in,"kill -9 %d\n",getpid());
             fprintf(in,"rm -rf $0");
             fclose(in);
@@ -40,12 +52,13 @@ int main() {
         }
         else {
             FILE *in;
+            int status;
             in=fopen("parent.sh","w");
             fprintf(in,"kill -9 %d\n",getpid());
             fprintf(in,"rm -rf $0");
             fclose(in);
             while(1) {
-
+                wait(&status);
             }
         }
     }
