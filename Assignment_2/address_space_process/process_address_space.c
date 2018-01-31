@@ -6,37 +6,38 @@
 #include <unistd.h>
 
 // global variables
-int g_first=1, g_second=3, g_third=4;
+int g_first, g_second, g_third;
 
 void print_variable() {
     int j, k, l;
     g_first=5;
     g_second=8;
     g_third=9;
-    printf("Address of local variable: j is %p\n",&j);
-    printf("Address of local variable: k is %p\n",&k);
-    printf("Address of local variable: l is %p\n",&l);
-    printf("Address of global variable: g_first is %p\n",&g_first);
-    printf("Address of global variable: g_second is %p\n",&g_second);
-    printf("Address of global variable: g_third is %p\n",&g_third);
-    printf("Global Value g_first: %d\n",g_first);
-    printf("Global Value g_second: %d\n",g_second);
-    printf("Global Value g_third: %d\n",g_third);
+    printf("Child: Address of local variable: j is %p\n",&j);
+    printf("Child: Address of local variable: k is %p\n",&k);
+    printf("Child: Address of local variable: l is %p\n",&l);
+    printf("Child: Address of global variable: g_first is %p\n",&g_first);
+    printf("Child: Address of global variable: g_second is %p\n",&g_second);
+    printf("Child: Address of global variable: g_third is %p\n",&g_third);
+    printf("Child: Global Value g_first: %d\n",g_first);
+    printf("Child: Global Value g_second: %d\n",g_second);
+    printf("Child: Global Value g_third: %d\n",g_third);
     return;
 }
 
 int main() {
     // local variables
     int a, b, c;
-    printf("Address of local variable: a is %p\n",&a);
-    printf("Address of local variable: b is %p\n",&b);
-    printf("Address of local variable: c is %p\n",&c);
-    printf("Address of global variable: g_first is %p\n",&g_first);
-    printf("Address of global variable: g_second is %p\n",&g_second);
-    printf("Address of global variable: g_third is %p\n",&g_third);
-    printf("Global Value g_first: %d\n",g_first);
-    printf("Global Value g_second: %d\n",g_second);
-    printf("Global Value g_third: %d\n",g_third);
+    g_first=1, g_second=3, g_third=4;
+    printf("Parent: Address of local variable: a is %p\n",&a);
+    printf("Parent: Address of local variable: b is %p\n",&b);
+    printf("Parent: Address of local variable: c is %p\n",&c);
+    printf("Parent: Address of global variable: g_first is %p\n",&g_first);
+    printf("Parent: Address of global variable: g_second is %p\n",&g_second);
+    printf("Parent: Address of global variable: g_third is %p\n",&g_third);
+    printf("Parent: Global Value g_first: %d\n",g_first);
+    printf("Parent: Global Value g_second: %d\n",g_second);
+    printf("Parent: Global Value g_third: %d\n",g_third);
     pid_t child_pid;
     int i;
     for(i=0;i<3;i++) {
