@@ -99,4 +99,4 @@ Thread 1 Global Value c: 20
 ```
 
 From the above output of program we had observed that thread1 has modified global variables a, b, c to 5, 8, 9 respectively but prints values of a, b, c as 16, 18, 20 which are the values written by thread 3 because global variables are in data segment of a program which is shared accross all threads.<br>
-Whereas in thread1 it modifies local variables i, j ,k to 5, 8 , 9 respectively and prints the same becausethe local variables are not shared, because local variables are in stack portion and thread has their own stack portion.
+Whereas thread1 it modifies local variables i, j ,k to 5, 8 , 9 respectively and prints the same because the local variables are not shared, because local variables are in stack portion and thread has their own stack portion.
