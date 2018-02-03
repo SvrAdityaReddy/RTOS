@@ -28,4 +28,4 @@ $ gcc push_input.c -o push_input -lwiringPi
 [1] [Core Functions](http://wiringpi.com/reference/core-functions/) <br>
 [2] [Priority, Interrupts and Threads](http://wiringpi.com/reference/priority-interrupts-and-threads/) <br>
 [3] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
-[4] [Pins](http://wiringpi.com/pins/)
+[4] [wiringPi Pin mapping](http://wiringpi.com/pins/)
