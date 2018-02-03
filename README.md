@@ -10,13 +10,13 @@ The solution and results are found in the [Assignment_1](https://github.com/SvrA
 
 This assignment is about getting familiar with asynchronous inputs and push inputs to a real time system. Here we are treating raspberry pi 2B as a real time system. <br>
 
-The code and other information related to asynchronous inputs can be found under the [asynchronous_inputs](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_2/asynchronous_inputs) directory. The code and other information related to push inputs can be found under the [push_inputs](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_2/push_inputs) directory. <br>
+The code and other information related to asynchronous inputs can be found under the [Assignment_2/asynchronous_inputs](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_2/asynchronous_inputs) directory. The code and other information related to push inputs can be found under the [Assignment_2/push_inputs](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_2/push_inputs) directory. <br>
 
 ## Assignment 3
 
 This assignment is about getting familiar with creation of child processess, creation of threads and their address spaces. <br>
 
-The code and other information related to process address space can be found under [address_space_process](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_3/address_space_process) directory. The code and other information related to thread address space can be found under [address_space_thread](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_3/address_space_thread) directory. <br>
+The code and other information related to process address space can be found under [Assignment_3/address_space_process](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_3/address_space_process) directory. The code and other information related to thread address space can be found under [Assignment_3/address_space_thread](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_3/address_space_thread) directory. <br>
 
 # References
 
