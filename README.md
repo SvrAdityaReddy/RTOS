@@ -4,7 +4,7 @@
 
 This assignment is about getting familiar with smoothening of pulse sensor data which is given to a real time system and count the heart beat i.e number of peaks. <br>
 
-The solution and results are found in the [Assignment_1](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_1) directory and code can be found under the [Assignment_1](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_1). <br>
+The solution and results are found under the [Assignment_1](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_1) directory. <br>
 
 ## Assignment 2
 
@@ -27,7 +27,7 @@ The code and other information related to process address space can be found und
 [5] [The sysfs Filesystem by Patrick Mochel](https://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf) <br>
 [6] [Man pages]() <br>
 [7] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
-[8] [Raspberry Pi GPIO Layout](https://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-rpi-gpio-header-and-pins/raspberry-pi-gpio-layout-model-b-plus-rotated-2700x900/#prettyPhoto/0/)
+[8] [Raspberry Pi GPIO Layout](https://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-rpi-gpio-header-and-pins/raspberry-pi-gpio-layout-model-b-plus-rotated-2700x900/#prettyPhoto/0/) <br>
 [9] [Priority, Interrupts and Threads](http://wiringpi.com/reference/priority-interrupts-and-threads/) <br>
 [10] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
 [11] [wiringPi Pin mapping](http://wiringpi.com/pins/) <br>
