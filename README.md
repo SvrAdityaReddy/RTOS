@@ -23,10 +23,11 @@ The code and other information related to process address space can be found und
 [1] [Savitzky–Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter#Appendix)<br>
 [2] [Smoothing Derivative in C++?](http://www.cplusplus.com/forum/general/105692/)<br>
 [3] [Median filter](https://en.wikipedia.org/wiki/Median_filter)<br>
-[5] [Man pages]() <br>
-[6] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
-[7] [Raspberry Pi GPIO Layout](https://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-rpi-gpio-header-and-pins/raspberry-pi-gpio-layout-model-b-plus-rotated-2700x900/#prettyPhoto/0/) <br>
-[8] [Core Functions](http://wiringpi.com/reference/core-functions/) <br>
+[4] [linux/Documentation/gpio/sysfs.txt](http://elixir.free-electrons.com/linux/latest/source/Documentation/gpio/sysfs.txt) <br>
+[5] [The sysfs Filesystem by Patrick Mochel](https://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf) <br>
+[6] [Man pages]() <br>
+[7] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
+[8] [Raspberry Pi GPIO Layout](https://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-rpi-gpio-header-and-pins/raspberry-pi-gpio-layout-model-b-plus-rotated-2700x900/#prettyPhoto/0/)
 [9] [Priority, Interrupts and Threads](http://wiringpi.com/reference/priority-interrupts-and-threads/) <br>
 [10] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
 [11] [wiringPi Pin mapping](http://wiringpi.com/pins/) <br>
