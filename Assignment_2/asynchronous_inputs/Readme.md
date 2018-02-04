@@ -1,6 +1,17 @@
 # Asynchronous Inputs
 
-Here Raspberry PI 2 B is used. GPIO pins used are GPIO 14, GPIO 18, GPIO 23, GPIO 24. The direction is set, values are read from these GPIO pins through sysfs interface. For more information regarding sysfs please refer the paper titled "The sysfs Filesystem" by Patrick Mochel which is available at [here](https://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf). For information about the gpio interface through sysfs is available at [here](http://elixir.free-electrons.com/linux/latest/source/Documentation/gpio/sysfs.txt). <br>
+Here Raspberry PI 2 B is used. GPIO pins used are GPIO 14, GPIO 18, GPIO 23, GPIO 24. The direction is set, values are read from these GPIO pins through sysfs interface. For more information regarding sysfs please refer the paper titled "The sysfs Filesystem" by Patrick Mochel which is available at [here](https://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf).
+
+The following fuctions in the code are written in view of gpio interface through sysfs. Information about the gpio interface through sysfs is available at [here](http://elixir.free-electrons.com/linux/latest/source/Documentation/gpio/sysfs.txt). <br>
+
+```{C}
+
+static int sysfs_gpio_get(int pin);
+static int sysfs_gpio_export(int pin);
+static int sysfs_gpio_unexport(int pin);
+static int sysfs_gpio_set_direction(int pin, int direction);
+
+```
 
 API's used in code are as follow
 
