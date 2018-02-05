@@ -2,6 +2,8 @@
 
 The program will fork 3 child process. Let parent process be p, three child process be child0,child1,child2. Let global variables be g_first, g_second, g_third. Let local variables be a, b, c in parent process, j, k, l in child processes. <br>
 
+On running program it will generate four files named parent.sh, child0.sh, child1.sh, child2.sh. On running these scripts corresponding processes gets killed and shell script file also gets removed. <br>
+
 # Addresses of global variables and local variables of parent process and child processes
 
 The program is run thrice. In the following tables we will look at addresses of local, global variables of processes p, child0, child1, child2. <br>

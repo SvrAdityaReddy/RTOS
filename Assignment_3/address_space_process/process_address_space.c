@@ -42,6 +42,7 @@ int main() {
     int i;
     for(i=0;i<3;i++) {
         child_pid=fork();
+        // to avoid forking of processes by child processes
         if(child_pid==0) {
             break;
         }
@@ -69,6 +70,12 @@ int main() {
             fprintf(in,"rm -rf $0");
             fclose(in);
             while(1) {
+                /* 
+                to read exit status of child process. 
+                If not present, on killing child process using kill -9 childpid child becomes zombie process,
+                because it's exit status is not be read by parent process. 
+                wait(&status) avoids that
+                */
                 wait(&status);
             }
         }
