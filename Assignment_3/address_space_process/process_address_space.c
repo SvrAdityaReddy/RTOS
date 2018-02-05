@@ -42,6 +42,7 @@ int main() {
     int i;
     for(i=0;i<3;i++) {
         child_pid=fork();
+        // to avoid forking of processes by child processes
         if(child_pid==0) {
             break;
         }
