@@ -1,6 +1,6 @@
 # PIPES (Inter Process Communnication Mechanism)
 
-PIPES provide half duplex communication. <br>
+PIPES provides half duplex communication. <br>
 The following api calls are used to use PIPE IPC mechanism to communicate between two processes. <br>
 
 ```{C}

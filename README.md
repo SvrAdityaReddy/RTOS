@@ -18,6 +18,15 @@ This assignment is about getting familiar with creation of child processess, cre
 
 The code and other information related to process address space can be found under [Assignment_3/address_space_process](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_3/address_space_process) directory. The code and other information related to thread address space can be found under [Assignment_3/address_space_thread](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_3/address_space_thread) directory. <br>
 
+## Assignment 4
+
+This assignment is about getting familiar with various IPC (Inter Process Communication) mechanisms.
+
+IPC mechanism | Directory of code and related files
+----------|--------
+PIPES | [Assignment_4/pipes](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/pipes)
+
+
 # References
 
 [1] [Savitzky–Golay filter](https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter#Appendix)<br>
@@ -31,3 +40,4 @@ The code and other information related to process address space can be found und
 [9] [Priority, Interrupts and Threads](http://wiringpi.com/reference/priority-interrupts-and-threads/) <br>
 [10] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
 [11] [wiringPi Pin mapping](http://wiringpi.com/pins/) <br>
+[12] [closing the unwanted file descriptors](https://unix.stackexchange.com/questions/132325/closing-the-unwanted-file-descriptors) <br>
