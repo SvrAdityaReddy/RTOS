@@ -26,6 +26,7 @@ IPC mechanism | Directory of code and related files
 ----------|--------
 PIPES | [Assignment_4/pipes](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/pipes)
 MESSAGE QUEUES | [Assignment_4/message_queues](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/message_queues)
+SHARED_MEMORY | [Assignment_4/shared_memory](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/shared_memory)
 
 # References
 
