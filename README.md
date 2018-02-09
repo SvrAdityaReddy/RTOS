@@ -41,3 +41,6 @@ MESSAGE QUEUES | [Assignment_4/message_queues](https://github.com/SvrAdityaReddy
 [10] [RPi GPIO Code Samples](https://elinux.org/RPi_GPIO_Code_Samples) <br>
 [11] [wiringPi Pin mapping](http://wiringpi.com/pins/) <br>
 [12] [closing the unwanted file descriptors](https://unix.stackexchange.com/questions/132325/closing-the-unwanted-file-descriptors) <br>
+[13] [The Linux Programming Interface](https://moodle2.units.it/pluginfile.php/115306/mod_resource/content/1/The%20Linux%20Programming%20Interface-Michael%20Kerrisk.pdf) <br>
+[14] [How to split a string in C/C++, Python and Java?](https://www.geeksforgeeks.org/how-to-split-a-string-in-cc-python-and-java/) <br>
+[15] [C Library - <limits.h>](https://www.tutorialspoint.com/c_standard_library/limits_h.htm) <br>
