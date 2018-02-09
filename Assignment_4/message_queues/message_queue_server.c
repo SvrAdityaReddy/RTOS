@@ -12,46 +12,23 @@
 int evaluate(char *buffer) {
     int length_buffer=strlen(buffer);
     char *r = strndup(buffer,length_buffer);
-    char *tok = r;
     /*
     operator array
     '~' refers to invalid operator
     */
     char *delimiter[5]={"+","-","*","/","~"};
-    char delimiter_position=0;
-    int a,b,i,result;
+    int delimiter_position=0;
+    int i,result;
     int values[2]={0,0};
     i=0;
-    // while(tok != NULL) {
-    //     strsep(&end, delimiter[delimiter_position]);
-    //     printf("%s\n",tok);
-    //     if(strncmp(tok,buffer,length_buffer)==0) {
-    //         delimiter_position=delimiter_position+1;
-    //         if(delimiter_position==5) {
-    //             break;
-    //         }
-    //     }
-    //     else {
-    //         values[i]=atoi(tok);
-    //         i=i+1;
-    //     }
-    //     tok = end;
-    // }
-    // printf("%d %d\n",values[0],values[1]);
-    // printf("%d\n",delimiter_position);
-    // free(r);
     char *token = strtok(r, delimiter[delimiter_position]);
-   
-    // Keep printing tokens while one of the
-    // delimiters present in str[].
     while (token!=NULL) {
-        // printf("%s\n", token);
         if(strncmp(token,buffer,length_buffer)==0) {
             delimiter_position=delimiter_position+1;
-            token = strtok(r, delimiter[delimiter_position]);
-            if(delimiter_position==5) {
+            if(delimiter_position==4) {
                 break;
             }
+            token = strtok(r, delimiter[delimiter_position]);
         }
         else {
             values[i]=atoi(token);
@@ -59,20 +36,19 @@ int evaluate(char *buffer) {
             token = strtok(NULL, delimiter[delimiter_position]);
         }
     }
-    // printf("%d\n",delimiter_position);
-    if(delimiter[delimiter_position]=="+") {
+    if(strncmp(delimiter[delimiter_position],"+",1)==0) {
         result=values[0]+values[1];
     }
     else {
-        if(delimiter[delimiter_position]=="-") {
+        if(strncmp(delimiter[delimiter_position],"-",1)==0) {
             result=values[0]-values[1];
         }
         else {
-            if(delimiter[delimiter_position]=="*") {
+            if(strncmp(delimiter[delimiter_position],"*",1)==0) {
                 result=values[0]*values[1];
             }
             else {
-                if(delimiter[delimiter_position]=="/") {
+                if(strncmp(delimiter[delimiter_position],"/",1)==0) {
                     result=values[0]/values[1];
                 }
                 else {
@@ -89,7 +65,7 @@ int main(int argc, char *argv[]) {
     mqd_t mqd;
     struct mq_attr attr;
     char *buffer;
-    int i=0,result=0;
+    int result=0;
     attr.mq_flags = 0; 
     attr.mq_maxmsg = MAX_MESSAGES; 
     attr.mq_msgsize = MAX_MSG_SIZE; 
