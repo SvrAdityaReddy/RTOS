@@ -18,6 +18,21 @@ ssize_t mq_receive(mqd_t mqdes, char *msg_ptr, size_t msg_len, unsigned int *msg
 
 ```
 
+Here we had tried to build the client server architecture using message queues. Server will have it's message queue named "/server_queue". The clients will have their message queues as "/client1_queue", "/client2_queue" etc. The clients will send the basic mathematical expression to be solved to server's message queue. The server will process the data from it's message queue and evaluates the mathematical expression and send it to the respective clients message queues. The client sends the message in the following format.
+
+```{sh}
+
+// client1 1+2
+clientid expression 
+
+``` 
+
+The message sent by client in above format helps the server to decide from which client it had received and sends the response to respective client using the information "clientid" present in the message. <br>
+
+The following is one of the assumptions made by server about client. <br>
+
+The client's message queue is named as "/clientid_queue"
+
 # Reference
 
 [1] [The Linux Programming Interface](https://moodle2.units.it/pluginfile.php/115306/mod_resource/content/1/The%20Linux%20Programming%20Interface-Michael%20Kerrisk.pdf) <br>
