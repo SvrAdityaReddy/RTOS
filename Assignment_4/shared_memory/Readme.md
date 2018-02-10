@@ -10,7 +10,7 @@ int ftruncate(int fd, off_t length);
 
 ```
 
-When we are using above api calls we should link -lrt while compiling
+When we are using above api calls we should link -lrt while compiling.
 
 There might be inconsistency when data is read by child process and data is written by parent process in shared memory location. To counter this, we use semaphores. In linux there are two kind of semaphores namely System V, POSIX. Here we will use POSIX semaphores. The following api calls are used.
 
@@ -23,7 +23,10 @@ int sem_unlink(const char *name);
 
 ``` 
 
-When we are using above api calls we should link -pthread while compiling
+When we are using above api calls we should link -pthread while compiling. <br>
+
+The code related to on how to use shared memory to communicate between parent and child process is [shared_memory.c](https://github.com/SvrAdityaReddy/RTOS/blob/master/Assignment_4/shared_memory/shared_memory.c). <br> 
+The code related to on how to use shared memory to communicate between parent and child process with semaphores is [shared_memory_semaphore.c](https://github.com/SvrAdityaReddy/RTOS/blob/master/Assignment_4/shared_memory/shared_memory_semaphore.c).
 
 # Reference
 
