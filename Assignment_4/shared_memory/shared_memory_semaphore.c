@@ -52,7 +52,6 @@ int main() {
     sem_wait(sem);
     memcpy(addr,"hi",2);
     sem_post(sem);
-    // printf("Child: Parent wrote: %s\n",(char*)addr);
     child_pid=fork();
     if(child_pid==-1) {
         printf("Error in creating child process\n");
