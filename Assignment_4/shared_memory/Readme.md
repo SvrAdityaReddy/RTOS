@@ -23,7 +23,7 @@ int sem_unlink(const char *name);
 
 ``` 
 
-When we are using above api calls we should link -lpthread while compiling
+When we are using above api calls we should link -pthread while compiling
 
 # Reference
 
