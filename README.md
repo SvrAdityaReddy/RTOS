@@ -20,13 +20,14 @@ The code and other information related to process address space can be found und
 
 ## Assignment 4
 
-This assignment is about getting familiar with various IPC (Inter Process Communication) mechanisms.
+This assignment is about getting familiar with various IPC (Inter Process Communication) mechanisms. In this assignment, we had used POSIX standard api calls intstead of System V api calls.
 
 IPC mechanism | Directory of code and related files
 ----------|--------
 PIPES | [Assignment_4/pipes](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/pipes)
 MESSAGE QUEUES | [Assignment_4/message_queues](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/message_queues)
 SHARED_MEMORY | [Assignment_4/shared_memory](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/shared_memory)
+SOCKETS | [Assignment_4/sockets](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/sockets)
 
 # References
 
