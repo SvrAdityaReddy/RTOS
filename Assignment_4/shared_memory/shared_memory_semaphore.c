@@ -8,8 +8,8 @@
 #include <sys/stat.h>        
 #include <semaphore.h>
 
-#define SEM_NAME "/sem_shm"
-#define SHM_NAME "/sh_mem"
+#define SEM_NAME "/sem_shm" // name of the semaphore
+#define SHM_NAME "/sh_mem" // name of the shared memory portion
 
 int main() {
     sem_t *sem;
@@ -18,12 +18,12 @@ int main() {
     void *addr;
     shm_unlink(SHM_NAME);
     sem_unlink(SEM_NAME);
-    sem=sem_open(SEM_NAME,O_CREAT,0664,1);
+    sem=sem_open(SEM_NAME,O_CREAT,0664,1); // sem is the address of named semaphore
     if(sem==SEM_FAILED) {
         printf("Error in creating named semaphore\n");
 
     }
-    fd=shm_open(SHM_NAME,O_CREAT|O_RDWR,0664);
+    fd=shm_open(SHM_NAME,O_CREAT|O_RDWR,0664); // fd is shared memory file descriptor
     if(fd==-1) {
         printf("Error in open shared memory descriptor");
         sem_close(sem);
@@ -32,6 +32,7 @@ int main() {
     }
     // size of shared memory block
     length=10;
+    // to truncate file to a specified length
     if(ftruncate(fd,length)==-1) {
         printf("Error in truncating shared memory size\n");
         close(fd);
@@ -40,6 +41,7 @@ int main() {
         shm_unlink(SHM_NAME);
         return 0;
     }
+    // to map file to memory
     addr=mmap(NULL,length,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
     if(addr==MAP_FAILED) {
         printf("Error in creating memory mapped region");
@@ -49,8 +51,10 @@ int main() {
         shm_unlink(SHM_NAME);
         return 0;
     }
+    // to lock the semaphore
     sem_wait(sem);
     memcpy(addr,"hi",2);
+    // to unlock the semaphore
     sem_post(sem);
     child_pid=fork();
     if(child_pid==-1) {
@@ -68,6 +72,7 @@ int main() {
             struct stat sb;
             int i=0;
             fd=shm_open(SHM_NAME,O_RDONLY,0);
+            // to determine the size of shared memory
             fstat(fd,&sb);
             addr=mmap(NULL,sb.st_size,PROT_READ,MAP_SHARED,fd,0);
             if(addr==MAP_FAILED) {

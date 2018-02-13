@@ -7,8 +7,8 @@
 #include <mqueue.h>
 
 #define SERVER_MQ_NAME "/server_queue"
-#define MAX_MESSAGES 10
-#define MAX_MSG_SIZE 256
+#define MAX_MESSAGES 10 // maximum no. of messages in message queue
+#define MAX_MSG_SIZE 256 // maximum size of each message in message queue
 
 int evaluate(char *buffer) {
     int length_buffer=strlen(buffer);
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     // to remove the entry of client's message queue in /dev/mqueue/ directory
     mq_unlink(SERVER_MQ_NAME);
     // creation and opening of server's message queue
-    mqd=mq_open(SERVER_MQ_NAME,O_CREAT|O_RDWR, 0664,&attr);
+    mqd=mq_open(SERVER_MQ_NAME,O_CREAT|O_RDWR, 0664,&attr); // mqd is server's message queue descriptor
     if(mqd == (mqd_t) -1) {
         printf("Error in creating server's message queue\n");
         return 0;
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
         strncat(client_q_name,client_name,strlen(client_name));
         strncat(client_q_name,"_queue",7);
         // opening of client's message queue
-        cmqd=mq_open(client_q_name,O_WRONLY);
+        cmqd=mq_open(client_q_name,O_WRONLY); // cmqd is client's message queue descriptor
         if(cmqd == (mqd_t) -1) {
             printf("Error in opening %s message queue\n",client_name);
             mq_unlink(SERVER_MQ_NAME);
