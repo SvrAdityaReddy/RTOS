@@ -15,6 +15,10 @@ int main(int argc, char *argv[]) {
     mqd_t mqd,smqd;
     struct mq_attr attr;
     char *buffer,*message,*temp;
+    if(argc!=2) {
+        printf("Usage: %s simple_expression(like 1+2)\n",argv[0]);
+        exit(0);
+    }
     attr.mq_flags = 0; 
     attr.mq_maxmsg = MAX_MESSAGES; 
     attr.mq_msgsize = MAX_MSG_SIZE; 

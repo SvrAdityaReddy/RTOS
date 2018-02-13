@@ -33,6 +33,17 @@ The following is one of the assumptions made by server about client. <br>
 
 The client's message queue is named as "/clientid_queue"
 
+Here by default in client's code [message_queue_client.c](https://github.com/SvrAdityaReddy/RTOS/blob/master/Assignment_4/message_queues/message_queue_client.c) we named message queue of client as "/client1_queue" and client name as "client1" and are defined as macros as follow.
+
+```{C}
+
+#define CLIENT_MQ_NAME "/client1_queue"
+#define CLIENT_NAME "client1"
+
+```
+
+When we are using message queues of POSIX we should link -lrt while compiling the code.
+
 # Reference
 
 [1] [The Linux Programming Interface by Michael Kerrisk](https://moodle2.units.it/pluginfile.php/115306/mod_resource/content/1/The%20Linux%20Programming%20Interface-Michael%20Kerrisk.pdf) <br>

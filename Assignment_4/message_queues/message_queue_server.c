@@ -114,7 +114,12 @@ int main(int argc, char *argv[]) {
         }
         // conversion of result to string
         message=(char *)malloc(sizeof(char)*100);
-        snprintf(message,100,"%d",result);
+        if(result==INT_MIN) {
+            snprintf(message,100,"%s","Invalid operator is present");
+        } 
+        else {
+            snprintf(message,100,"%d",result);
+        }
         // writing message to client's message queue
         if(mq_send(cmqd,message,100,0)==-1) {
             mq_close(cmqd);
