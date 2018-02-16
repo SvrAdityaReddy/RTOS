@@ -20,7 +20,7 @@ The code and other information related to process address space can be found und
 
 ## Assignment 4
 
-This assignment is about getting familiar with various IPC (Inter Process Communication) mechanisms. In this assignment, we had used POSIX standard api calls intstead of System V api calls.
+This assignment is about getting familiar with various IPC (Inter Process Communication) mechanisms. In this assignment, we had used POSIX standard api calls intstead of System V api calls for message queues and shared memory IPC mechanisms.
 
 IPC mechanism | Directory of code and related files
 ----------|--------
