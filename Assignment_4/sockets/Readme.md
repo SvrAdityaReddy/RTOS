@@ -41,9 +41,27 @@ ssize_t send(int sockfd, const void *buf, size_t len, int flags);
 
 ```
 
-Now, we will discuss some of the details of implementation of one way and two way chat applications. 
+Of all the api's mentioned above, the following api's are used to reap all child processes on server side as in server code we are forking a child process to handle each client's connection.
+
+```{C}
+
+int sigemptyset(sigset_t *set);
+int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+
+```
+
+The above mentioned api's (mainly sigaction()) are used to change the action taken by parent process on receipt of signal "SIGCHLD" (it is the signal sent to parent process by child when it exits or terminates) as default response is to ignore the signal, here we want to collect signal and collect the exit status of child process. <br>
+
+The following api call had been used in server code to collect the exit satus of child process on catching "SIGCHLD" by parent process in server code.
+
+```{C}
+
+pid_t waitpid(pid_t pid, int *status, int options);
+
+```
 
 # References
 
 [1] [Man pages]() <br>
 [2] [The Linux Programming Interface by Michael Kerrisk](https://moodle2.units.it/pluginfile.php/115306/mod_resource/content/1/The%20Linux%20Programming%20Interface-Michael%20Kerrisk.pdf) <br>
+[3] [Catching SIGCHLD](https://docs.oracle.com/cd/E19455-01/806-4750/signals-7/index.html) <br>
