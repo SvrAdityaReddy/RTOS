@@ -46,3 +46,4 @@ SOCKETS | [Assignment_4/sockets](https://github.com/SvrAdityaReddy/RTOS/tree/mas
 [13] [The Linux Programming Interface by Michael Kerrisk](https://moodle2.units.it/pluginfile.php/115306/mod_resource/content/1/The%20Linux%20Programming%20Interface-Michael%20Kerrisk.pdf) <br>
 [14] [How to split a string in C/C++, Python and Java?](https://www.geeksforgeeks.org/how-to-split-a-string-in-cc-python-and-java/) <br>
 [15] [C Library - <limits.h>](https://www.tutorialspoint.com/c_standard_library/limits_h.htm) <br>
+[16] [Catching SIGCHLD](https://docs.oracle.com/cd/E19455-01/806-4750/signals-7/index.html) <br>
