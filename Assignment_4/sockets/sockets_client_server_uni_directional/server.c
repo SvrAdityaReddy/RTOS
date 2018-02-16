@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <sys/types.h>        
 #include <sys/socket.h>
+#include <sys/wait.h>
 #include <netdb.h>
 
 #define PORT_NUM "5000"
@@ -12,17 +13,53 @@
 #define ADDR_STR_LEN (NI_MAXHOST+NI_MAXSERV+10)
 #define MAX_DATA_SIZE 50
 
+int cfd;
+
+void my_signal_handler(int sig_num) {
+    char answer[2];
+    if(sig_num==SIGINT) {
+        printf("\nReceived SIGINT i.e ctrl+c\n");
+        printf("Do you want to terminate the process (Y/N): ");
+        scanf("%s",answer);
+        if(strncmp(answer,"Y",1)==0) {
+            close(cfd);
+            exit(0);
+        }
+    }
+}
+
+void grim_reap(int sig) {
+    while(waitpid(-1,NULL,WNOHANG)>0) {
+        continue;
+    }
+}
+
 int main() {
     struct addrinfo hints;
     struct addrinfo *result,*rp;
     struct sockaddr_storage claddr;
     socklen_t addrlen;
-    int lfd,optval,cfd;
+    int lfd,optval;
     char host[NI_MAXHOST],service[NI_MAXSERV];
     char addr_str[ADDR_STR_LEN];
+    ssize_t num_bytes;
+    char buffer[MAX_DATA_SIZE];
+    struct sigaction sa;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags=SA_RESTART;
+    sa.sa_handler=grim_reap;
+    if(sigaction(SIGCHLD,&sa,NULL)==-1) {
+        printf("Error in sigaction when trying to change action done on SIGCHLD\n");
+        exit(0);
+    }
     // installing signal handler to ignore SIGPIPE signal
     if(signal(SIGPIPE,SIG_IGN)==SIG_ERR) {
         printf("Error in ignoring the SIGPIPE signal\n");
+        return 0;
+    }
+    // installing signal handler to handle SIGINT
+    if(signal(SIGINT,my_signal_handler)==SIG_ERR) {
+        printf("Error in handling the SIGINT signal\n");
         return 0;
     }
     // to fill the sizeof(struct addrinfo) bytes of memory area pointed by &hints by zero
@@ -66,7 +103,6 @@ int main() {
     // to handle client requests
     for(;;) {
         addrlen=sizeof(claddr);
-        // printf("Waiting for Connections\n");
         cfd=accept(lfd,(struct sockaddr *)&claddr,&addrlen);
         if(cfd==-1) {
             printf("Error in acccepting client's request");
@@ -78,16 +114,12 @@ int main() {
         printf("Connection from %s\n",addr_str);
         // forking a child process to handle each request
         if(!fork()) {
-            ssize_t num_bytes;
-            char buffer[MAX_DATA_SIZE];
-            for(;;) {
-                if((num_bytes=recv(cfd,buffer,MAX_DATA_SIZE-1,0))==-1) {
-                    printf("Error in receiving messages from client\n");
-                    exit(1);
-                }
+            close(lfd);
+            while((num_bytes=recv(cfd,buffer,MAX_DATA_SIZE-1,0))>0) {
                 buffer[num_bytes]='\0';
                 printf("Server: Message from %s: %s",host,buffer);
-            }
+            }   
+            exit(1);
         }
     }
     return 0;

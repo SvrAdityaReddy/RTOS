@@ -9,11 +9,30 @@
 
 #define MAX_DATA_SIZE 50
 
+int lfd;
+
+void my_signal_handler(int sig_num) {
+    char answer[2];
+    if(sig_num==SIGINT) {
+        printf("\nReceived SIGINT i.e ctrl+c\n");
+        printf("Do you want to terminate the process (Y/N): ");
+        scanf("%s",answer);
+        if(strncmp(answer,"Y",1)==0) {
+            close(lfd);
+            exit(0);
+        }
+    }
+}
+
 int main(int argc, char *argv[]) {
     struct addrinfo hints;
     struct addrinfo *result,*rp;
-    int lfd;
     char message[MAX_DATA_SIZE];
+    // installing signal handler to handle SIGINT
+    if(signal(SIGINT,my_signal_handler)==SIG_ERR) {
+        printf("Error in handling the SIGINT signal\n");
+        return 0;
+    }
     // to fill the sizeof(struct addrinfo) bytes of memory area pointed by &hints by zero
     memset(&hints,0,sizeof(struct addrinfo));
     hints.ai_family=AF_UNSPEC;
