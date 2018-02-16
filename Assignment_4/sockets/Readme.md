@@ -60,6 +60,10 @@ pid_t waitpid(pid_t pid, int *status, int options);
 
 ```
 
+The code related to one way chat application can be found in the [sockets_client_server_uni_directional](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/sockets/sockets_client_server_uni_directional). <br>
+
+The code related to two way chat application can be found in the [sockets_client_server_bi_directional](https://github.com/SvrAdityaReddy/RTOS/tree/master/Assignment_4/sockets/sockets_client_server_bi_directional). <br>
+
 # References
 
 [1] [Man pages]() <br>
