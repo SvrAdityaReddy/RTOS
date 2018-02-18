@@ -28,6 +28,11 @@ int main(int argc, char *argv[]) {
     struct addrinfo hints;
     struct addrinfo *result,*rp;
     char message[MAX_DATA_SIZE];
+    // to control number of arguments passed to program
+    if(argc!=3) {
+        printf("Usage: ./client <server_ip> <listening_port_of_server>\n");
+        return 0;
+    }
     // installing signal handler to handle SIGINT
     if(signal(SIGINT,my_signal_handler)==SIG_ERR) {
         printf("Error in handling the SIGINT signal\n");
