@@ -64,20 +64,18 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     freeaddrinfo(result);
-    for(;;) {
-        printf("Enter message to be sent to server: ");
-        if(fgets(message,MAX_DATA_SIZE,stdin)==NULL) {
-            printf("Error reading from stdin\n");
-            continue;
-        }
-        if(send(sfd,message,strlen(message),0)==-1) {
-            printf("Error in sending message to server\n");
-        }
-        else {
-            if((num_bytes=recv(sfd,buffer,MAX_DATA_SIZE-1,0))>0) {
-                buffer[num_bytes]='\0';
-                printf("Client: Message from Server: %s",buffer);
+    if(!fork()) {
+        while(fgets(message,MAX_DATA_SIZE,stdin)!=NULL) {
+            if(send(sfd,message,strlen(message),0)==-1) {
+                printf("Error in sending message to server\n");
             }
+        }
+        exit(1);
+    }
+    else {
+        while((num_bytes=recv(sfd,buffer,MAX_DATA_SIZE-1,0))>0) {
+            buffer[num_bytes]='\0';
+            printf("Client: Message from Server: %s",buffer);
         }
     }
     return 0;

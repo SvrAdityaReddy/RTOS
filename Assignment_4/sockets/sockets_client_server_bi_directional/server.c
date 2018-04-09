@@ -116,19 +116,21 @@ int main(int argc, int *argv[]) {
         // forking a child process to handle each request
         if(!fork()) {
             close(lfd);
-            while((num_bytes=recv(cfd,buffer,MAX_DATA_SIZE-1,0))>0) {
-                buffer[num_bytes]='\0';
-                printf("Server: Message from %s: %s",host,buffer);
-                // to send message to client 
-                printf("Enter message to be sent to (%s, %s): ",host,service);
-                if(fgets(message,MAX_DATA_SIZE,stdin)==NULL) {
-                    printf("Error reading from stdin\n");
-                    continue;
+            if(!fork()) {
+                while((num_bytes=recv(cfd,buffer,MAX_DATA_SIZE-1,0))>0) {
+                    buffer[num_bytes]='\0';
+                    printf("Server: Message from %s: %s",host,buffer);      
                 }
-                if(send(cfd,message,strlen(message),0)==-1) {
-                    printf("Error in sending message to (%s, %s)\n",host,service);
+                exit(1);
+            }
+            else {
+                while(fgets(message,MAX_DATA_SIZE,stdin)!=NULL) {
+                    if(send(cfd,message,strlen(message),0)==-1) {
+                        printf("Error in sending message to (%s, %s)\n",host,service);
+                    }    
                 }
-            }   
+                exit(1);
+            }
             exit(1);
         }
     }
